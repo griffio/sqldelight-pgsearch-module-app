@@ -7,9 +7,9 @@ import com.intellij.lang.ASTNode
 import griffio.grammar.psi.PgSearchProximityOperator
 
 /**
- * Used for `x @@@ y` expressions in SqlBinaryExpr type resolver
+ * Used for `x ||| y` and `x &&& y` expressions in SqlBinaryExpr type resolver
  */
-internal abstract class PgSearchProximityOperatorMixin(node: ASTNode) :
+internal abstract class PgSearchMatchOperatorMixin(node: ASTNode) :
     SqlCompositeElementImpl(node),
     SqlBinaryExpr,
     PgSearchProximityOperator {

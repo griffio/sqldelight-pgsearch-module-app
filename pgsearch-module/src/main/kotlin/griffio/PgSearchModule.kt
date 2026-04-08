@@ -56,7 +56,12 @@ class PgSearchModule : SqlDelightModule {
 // parentResolver is called to delegate to the next TypeResolver in the chain
 private class PgSearchTypeResolver(private val parentResolver: TypeResolver) : PostgreSqlTypeResolver(parentResolver) {
     override fun resolvedType(expr: SqlExpr) : IntermediateType {
-        return if (expr is PgSearchExtensionExpr && expr.proximityOperatorExpression != null)
-            IntermediateType(PrimitiveType.REAL) else parentResolver.resolvedType(expr) // use parentResolver to use the module chain
+        return when (expr) {
+            is PgSearchExtensionExpr if (expr.proximityOperatorExpression != null
+                    || expr.matchBiJunctionOperatorExpression != null || expr.phraseOperatorExpression != null) -> IntermediateType(
+                PrimitiveType.BOOLEAN
+            )
+            else -> parentResolver.resolvedType(expr)
+        } // use parentResolver to use the module chain
     }
 }
