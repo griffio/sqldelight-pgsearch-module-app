@@ -50,6 +50,9 @@ FROM mixed_numeric_string_test
 WHERE content @@@ 'red';
 ```
 
+TODO
+* Add more operators
+
 ---
 
 ```shell
