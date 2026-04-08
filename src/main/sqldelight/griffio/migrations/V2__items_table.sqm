@@ -1,0 +1,16 @@
+CREATE TABLE items (
+    id SERIAL PRIMARY KEY,
+    description TEXT,
+    rating INTEGER CHECK (rating BETWEEN 1 AND 5),
+    category VARCHAR(255),
+    in_stock BOOLEAN,
+    metadata JSONB,
+    created_at TIMESTAMP,
+    last_updated_date DATE,
+    latest_available_time TIME,
+    weight_range INT4RANGE
+);
+
+CREATE INDEX search_idx ON items
+USING bm25 (id, description, category, rating, in_stock, created_at, metadata, weight_range)
+WITH (key_field='id');

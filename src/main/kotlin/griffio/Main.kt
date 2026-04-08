@@ -17,4 +17,8 @@ fun main() {
     val sample = Sample(driver)
 
     sample.searchQueries.selectMixedNumericString().executeAsList().forEach { println(it) }
+
+    driver.execute(-1, "CALL paradedb.create_bm25_test_table(schema_name => 'public', table_name => 'items');", 0).value
+
+    sample.itemsQueries.selectMatchDisjunction().executeAsList().forEach { println(it) }
 }
