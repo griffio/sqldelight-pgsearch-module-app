@@ -1,0 +1,4 @@
+selectMixedNumericString:
+SELECT numeric_field1, numeric_field2, string_field1, string_field2
+FROM mixed_numeric_string_test
+WHERE content @@@ 'red';
