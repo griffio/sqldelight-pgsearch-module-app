@@ -45,9 +45,25 @@ CREATE EXTENSION IF NOT EXISTS pg_search;
 Proximity search operator `@@@`
 
 ```sql
+selectMatchProximity:
 SELECT numeric_field1, numeric_field2, string_field1, string_field2
 FROM mixed_numeric_string_test
 WHERE content @@@ 'red';
+
+selectMatchDisjunction:
+SELECT description, rating, category
+FROM items
+WHERE description ||| 'running shoes';
+
+selectMatchConjunction:
+SELECT description, rating, category
+FROM items
+WHERE description &&& 'running shoes';
+
+selectMatchConjunctionArray:
+SELECT description, rating, category
+FROM items
+WHERE description &&& ARRAY['running', 'shoes'];
 ```
 
 TODO
