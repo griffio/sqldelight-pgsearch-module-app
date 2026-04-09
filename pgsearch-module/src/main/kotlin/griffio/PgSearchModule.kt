@@ -17,6 +17,7 @@ import griffio.grammar.PgSearchParserUtil
 import griffio.grammar.PgSearchParserUtil.extension_expr
 import griffio.grammar.PgSearchParserUtil.index_method
 import griffio.grammar.PgSearchParserUtil.storage_parameters
+import griffio.grammar.PgSearchParserUtil.type_name
 import griffio.grammar.psi.PgSearchExtensionExpr
 
 class PgSearchModule : SqlDelightModule {
@@ -27,10 +28,18 @@ class PgSearchModule : SqlDelightModule {
         PgSearchParserUtil.overridePostgreSqlParser()
         // As the grammar doesn't support inheritance - override type_name manually to try inherited type_name
         // Capture any existing overrides (e.g., from other PostgreSql Modules)
+        val previousTypeName = PostgreSqlParserUtil.type_name
         val previousExtensionExpr = PostgreSqlParserUtil.extension_expr
         val previousIndexMethod = PostgreSqlParserUtil.index_method
         val previousStorageParameters = PostgreSqlParserUtil.storage_parameters
         // etc
+        PostgreSqlParserUtil.type_name = Parser { psiBuilder, i ->
+            type_name?.parse(psiBuilder, i)
+                    ?: PgSearchParser.type_name_real(psiBuilder, i)
+                    || previousTypeName?.parse(psiBuilder, i)
+                    ?: PostgreSqlParser.type_name_real(psiBuilder, i)
+        }
+
         PostgreSqlParserUtil.extension_expr = Parser { psiBuilder, i ->
             extension_expr?.parse(psiBuilder, i)
                     ?: PgSearchParser.extension_expr_real(psiBuilder, i)

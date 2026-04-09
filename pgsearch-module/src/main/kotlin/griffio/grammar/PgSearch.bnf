@@ -22,6 +22,13 @@
   ]
 }
 
+type_name ::= simple_data_type {
+  extends = "app.cash.sqldelight.dialects.postgresql.grammar.psi.impl.PostgreSqlTypeNameImpl"
+  implements = "app.cash.sqldelight.dialects.postgresql.grammar.psi.PostgreSqlTypeName"
+}
+
+simple_data_type ::= 'SIMPLE' [ LP {string_literal} [ ( COMMA {string_literal} ) * ] RP ]
+
 index_method ::= 'bm25' {
   extends = "app.cash.sqldelight.dialects.postgresql.grammar.psi.impl.PostgreSqlIndexMethodImpl"
   implements = "app.cash.sqldelight.dialects.postgresql.grammar.psi.PostgreSqlIndexMethod"
