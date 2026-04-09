@@ -74,6 +74,9 @@ selectTerm:
 SELECT description, rating, category
 FROM items
 WHERE description === 'running';
+
+selectTokenizer:
+SELECT 'Tokenize me!'::SIMPLE('stemmer=english')::TEXT[];
 ```
 
 TODO
