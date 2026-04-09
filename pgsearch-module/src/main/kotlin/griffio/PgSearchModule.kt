@@ -24,7 +24,6 @@ class PgSearchModule : SqlDelightModule {
         PgSearchParserUtil.overridePostgreSqlParser()
         // As the grammar doesn't support inheritance - override type_name manually to try inherited type_name
         // Capture any existing overrides (e.g., from other PostgreSql Modules)
-        val previousTypeName = PostgreSqlParserUtil.type_name
         val previousExtensionExpr = PostgreSqlParserUtil.extension_expr
         val previousIndexMethod = PostgreSqlParserUtil.index_method
         val previousStorageParameters = PostgreSqlParserUtil.storage_parameters
