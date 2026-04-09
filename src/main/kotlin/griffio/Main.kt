@@ -20,5 +20,10 @@ fun main() {
 
     driver.execute(-1, "CALL paradedb.create_bm25_test_table(schema_name => 'public', table_name => 'items');", 0).value
 
+    println("selectMatchDisjunction")
     sample.itemsQueries.selectMatchDisjunction().executeAsList().forEach { println(it) }
+    println("selectMatchConjunction")
+    sample.itemsQueries.selectMatchConjunction().executeAsList().forEach { println(it) }
+    println("selectMatchConjunctionArray")
+    sample.itemsQueries.selectMatchConjunctionArray().executeAsList().forEach { println(it) }
 }

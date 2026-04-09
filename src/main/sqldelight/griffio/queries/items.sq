@@ -2,3 +2,13 @@ selectMatchDisjunction:
 SELECT description, rating, category
 FROM items
 WHERE description ||| 'running shoes';
+
+selectMatchConjunction:
+SELECT description, rating, category
+FROM items
+WHERE description &&& 'running shoes';
+
+selectMatchConjunctionArray:
+SELECT description, rating, category
+FROM items
+WHERE description &&& ARRAY['running', 'shoes'];
