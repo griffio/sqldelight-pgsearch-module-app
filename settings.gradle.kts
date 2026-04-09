@@ -1,5 +1,6 @@
 pluginManagement {
     repositories {
+        maven("https://central.sonatype.com/repository/maven-snapshots")
         mavenCentral()
         gradlePluginPortal()
     }
@@ -14,7 +15,7 @@ rootProject.name = "sqldelight-pgsearch-module-app"
 dependencyResolutionManagement {
     versionCatalogs {
         create("libs") {
-            val vSqlDelight = "2.3.2"
+            val vSqlDelight = "2.4.0-SNAPSHOT"
             val vIntellij = "231.9392.1"
             version("intellij", vIntellij)
             plugin("kotlin", "org.jetbrains.kotlin.jvm").version("2.3.10")
