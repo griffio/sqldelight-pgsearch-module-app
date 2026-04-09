@@ -78,6 +78,7 @@ WHERE description === 'running';
 
 TODO
 * Add more operator functions
+* Add more token filters
 
 ---
 
