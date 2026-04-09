@@ -8,6 +8,7 @@ import griffio.grammar.psi.PgSearchProximityOperator
 
 /**
  * Used for `x ||| y` and `x &&& y` expressions in SqlBinaryExpr type resolver
+ * https://docs.paradedb.com/documentation/full-text/match
  */
 internal abstract class PgSearchMatchOperatorMixin(node: ASTNode) :
     SqlCompositeElementImpl(node),

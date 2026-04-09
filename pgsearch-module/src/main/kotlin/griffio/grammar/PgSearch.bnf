@@ -55,7 +55,14 @@ phrase_operator_expression ::= sql_column_expr phrase_operator <<expr '-1'>> {
   pin = 2
 }
 
-extension_expr ::= proximity_operator_expression | match_bi_junction_operator_expression | phrase_operator_expression {
+term_operator ::= '==='
+
+term_operator_expression ::= sql_column_expr term_operator <<expr '-1'>> {
+  mixin = "griffio.grammar.mixins.PgSearchTermOperatorMixin"
+  pin = 2
+}
+
+extension_expr ::= term_operator_expression | proximity_operator_expression | match_bi_junction_operator_expression | phrase_operator_expression {
   extends = "app.cash.sqldelight.dialects.postgresql.grammar.psi.impl.PostgreSqlExtensionExprImpl"
   implements = "app.cash.sqldelight.dialects.postgresql.grammar.psi.PostgreSqlExtensionExpr"
 }

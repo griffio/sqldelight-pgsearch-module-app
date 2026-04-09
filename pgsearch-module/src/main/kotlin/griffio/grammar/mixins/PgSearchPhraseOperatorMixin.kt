@@ -8,6 +8,7 @@ import griffio.grammar.psi.PgSearchProximityOperator
 
 /**
  * Used for `x ### y` expressions in SqlBinaryExpr type resolver
+ * https://docs.paradedb.com/documentation/full-text/phrase
  */
 internal abstract class PgSearchPhraseOperatorMixin(node: ASTNode) :
     SqlCompositeElementImpl(node),
