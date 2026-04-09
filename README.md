@@ -77,7 +77,7 @@ WHERE description === 'running';
 ```
 
 TODO
-* Add more operators
+* Add more operator functions
 
 ---
 
