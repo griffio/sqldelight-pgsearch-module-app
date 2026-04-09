@@ -3,5 +3,8 @@ SELECT numeric_field1, numeric_field2, string_field1, string_field2
 FROM mixed_numeric_string_test
 WHERE content @@@ :query;
 
-selectTokenizer:
+selectSimpleTokenizer:
 SELECT 'Tokenize me!'::SIMPLE('stemmer=english')::TEXT[];
+
+selectNgramTokenizer:
+SELECT 'Tokenize me!'::NGRAM(3,3,'prefix_only=true')::TEXT[];

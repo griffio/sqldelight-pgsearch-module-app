@@ -33,7 +33,9 @@ fun main() {
     sample.itemsQueries.selectTerm().executeAsList().forEach { println(it) }
     println("selectSnippet")
     sample.itemsQueries.selectSnippet().executeAsList().forEach { println(it) }
-    println("selectTokenizer")
-    sample.searchQueries.selectTokenizer().executeAsOne().also { println(it.joinToString()) }
+    println("selectSimpleTokenizer")
+    sample.searchQueries.selectSimpleTokenizer().executeAsOne().also { println(it.joinToString()) }
+    println("selectNgramTokenizer")
+    sample.searchQueries.selectNgramTokenizer().executeAsOne().also { println(it.joinToString()) }
 
 }
