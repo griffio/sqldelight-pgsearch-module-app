@@ -26,4 +26,10 @@ fun main() {
     sample.itemsQueries.selectMatchConjunction().executeAsList().forEach { println(it) }
     println("selectMatchConjunctionArray")
     sample.itemsQueries.selectMatchConjunctionArray().executeAsList().forEach { println(it) }
+    println("selectPhrase")
+    sample.itemsQueries.selectPhrase().executeAsList().forEach { println(it) }
+    println("selectTerm")
+    sample.itemsQueries.selectTerm().executeAsList().forEach { println(it) }
+
+
 }

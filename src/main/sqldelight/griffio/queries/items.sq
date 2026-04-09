@@ -12,3 +12,14 @@ selectMatchConjunctionArray:
 SELECT description, rating, category
 FROM items
 WHERE description &&& ARRAY['running', 'shoes'];
+
+selectPhrase:
+SELECT description, rating, category
+FROM items
+WHERE description ### 'running shoes';
+
+selectTerm:
+SELECT description, rating, category
+FROM items
+WHERE description === 'running';
+
