@@ -5,7 +5,7 @@ import griffio.queries.Sample
 import org.postgresql.ds.PGSimpleDataSource
 
 private fun getSqlDriver() = PGSimpleDataSource().apply {
-    setURL("jdbc:postgresql://localhost:5432/mydatabase")
+    setURL("jdbc:postgresql://localhost:5432/mydatabase?options=-c%20search_path=pdb,public")
     applicationName = "App Main"
     user = "myuser"
     password = "mypassword"
@@ -16,7 +16,8 @@ fun main() {
     val driver = getSqlDriver()
     val sample = Sample(driver)
 
-    sample.searchQueries.selectMixedNumericString().executeAsList().forEach { println(it) }
+    println("selectMixedNumericString")
+    sample.searchQueries.selectMixedNumericString("red").executeAsList().forEach { println(it) }
 
     driver.execute(-1, "CALL paradedb.create_bm25_test_table(schema_name => 'public', table_name => 'items');", 0).value
 
@@ -30,6 +31,7 @@ fun main() {
     sample.itemsQueries.selectPhrase().executeAsList().forEach { println(it) }
     println("selectTerm")
     sample.itemsQueries.selectTerm().executeAsList().forEach { println(it) }
-
+    println("selectSnippet")
+    sample.itemsQueries.selectSnippet().executeAsList().forEach { println(it) }
 
 }

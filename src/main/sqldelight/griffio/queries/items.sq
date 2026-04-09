@@ -23,3 +23,7 @@ SELECT description, rating, category
 FROM items
 WHERE description === 'running';
 
+selectSnippet:
+SELECT id, snippet(description)
+FROM items
+WHERE description ||| 'shoes';
