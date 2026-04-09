@@ -7,7 +7,10 @@ import app.cash.sqldelight.dialect.api.TypeResolver
 import app.cash.sqldelight.dialects.postgresql.PostgreSqlTypeResolver
 import app.cash.sqldelight.dialects.postgresql.grammar.PostgreSqlParser
 import app.cash.sqldelight.dialects.postgresql.grammar.PostgreSqlParserUtil
+import com.alecstrong.sql.psi.core.SqlParser
+import com.alecstrong.sql.psi.core.SqlParserUtil
 import com.alecstrong.sql.psi.core.psi.SqlExpr
+import com.alecstrong.sql.psi.core.psi.SqlFunctionExpr
 import com.intellij.lang.parser.GeneratedParserUtilBase.Parser
 import griffio.grammar.PgSearchParser
 import griffio.grammar.PgSearchParserUtil
@@ -63,4 +66,11 @@ private class PgSearchTypeResolver(private val parentResolver: TypeResolver) : P
             else -> parentResolver.resolvedType(expr)
         } // use parentResolver to use the module chain
     }
+
+    override fun functionType(functionExpr: SqlFunctionExpr): IntermediateType? =
+        when (functionExpr.functionName.text.lowercase()) {
+            "snippet" -> IntermediateType(PrimitiveType.TEXT)
+            "snippet_positions" -> IntermediateType(PrimitiveType.TEXT)
+            else -> super.functionType(functionExpr) // postgresql.PostgreSqlTypeResolver.functionType calls parentResolver
+        }
 }
