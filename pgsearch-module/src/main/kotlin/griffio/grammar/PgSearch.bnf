@@ -22,12 +22,14 @@
   ]
 }
 
-type_name ::= simple_data_type {
+type_name ::= simple_data_type | ngram_data_type {
   extends = "app.cash.sqldelight.dialects.postgresql.grammar.psi.impl.PostgreSqlTypeNameImpl"
   implements = "app.cash.sqldelight.dialects.postgresql.grammar.psi.PostgreSqlTypeName"
 }
 
 simple_data_type ::= 'SIMPLE' [ LP {string_literal} [ ( COMMA {string_literal} ) * ] RP ]
+
+ngram_data_type ::= 'NGRAM' LP sql_signed_number COMMA sql_signed_number [ COMMA {string_literal} ] RP
 
 index_method ::= 'bm25' {
   extends = "app.cash.sqldelight.dialects.postgresql.grammar.psi.impl.PostgreSqlIndexMethodImpl"
@@ -38,6 +40,8 @@ storage_parameters ::= 'key_field' | 'numeric_fields' | 'text_fields' | 'json_fi
   extends = "app.cash.sqldelight.dialects.postgresql.grammar.psi.impl.PostgreSqlStorageParameterImpl"
   implements = "app.cash.sqldelight.dialects.postgresql.grammar.psi.PostgreSqlStorageParameter"
 }
+
+private sql_signed_number ::= <<signedNumberExt <<signed_number_real>>>>
 
 private sql_column_expr ::= <<columnExprExt <<column_expr_real>>>>
 
