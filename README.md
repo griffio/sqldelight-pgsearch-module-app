@@ -45,7 +45,7 @@ CREATE EXTENSION IF NOT EXISTS pg_search;
 Search operators:
 
 ```sql
-selectMatchProximity:
+selectMixedNumericString:
 SELECT numeric_field1, numeric_field2, string_field1, string_field2
 FROM mixed_numeric_string_test
 WHERE content @@@ 'red';
@@ -64,6 +64,16 @@ selectMatchConjunctionArray:
 SELECT description, rating, category
 FROM items
 WHERE description &&& ARRAY['running', 'shoes'];
+
+selectPhrase:
+SELECT description, rating, category
+FROM items
+WHERE description ### 'running shoes';
+
+selectTerm:
+SELECT description, rating, category
+FROM items
+WHERE description === 'running';
 ```
 
 TODO
