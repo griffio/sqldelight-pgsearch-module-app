@@ -12,5 +12,5 @@ CREATE TABLE items (
 );
 
 CREATE INDEX search_idx ON items
-USING bm25 (id, description, category, rating, in_stock, created_at, metadata, weight_range)
+USING bm25 (id, (description::SIMPLE('stemmer=english', 'ascii_folding=true')), category, rating, in_stock, created_at, metadata, weight_range)
 WITH (key_field='id');
