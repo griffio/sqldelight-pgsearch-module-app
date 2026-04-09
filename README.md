@@ -42,7 +42,7 @@ sqldelight {
 CREATE EXTENSION IF NOT EXISTS pg_search;
 ```
 
-Proximity search operator `@@@`
+Search operators:
 
 ```sql
 selectMatchProximity:
