@@ -34,3 +34,16 @@ FROM items
 WHERE description ||| 'keyboard' OR rating < 2
 ORDER BY score(id) DESC
 LIMIT 5;
+
+selectBoost:
+SELECT id, score(id) AS bm25_score, description, category
+FROM items
+WHERE description ||| 'shoes'::BOOST(2) OR category ||| 'footwear'
+ORDER BY bm25_score DESC
+LIMIT 5;
+
+selectFuzzy:
+SELECT id, description
+FROM items
+WHERE description &&& 'slee rann'::FUZZY(1, 'true')
+LIMIT 5;

@@ -33,6 +33,10 @@ fun main() {
     sample.itemsQueries.selectTerm().executeAsList().forEach { println(it) }
     println("selectScore")
     sample.itemsQueries.selectScore().executeAsList().forEach { println(it) }
+    println("selectFuzzy")
+    sample.itemsQueries.selectFuzzy().executeAsList().forEach { println(it) }
+    println("selectBoost")
+    sample.itemsQueries.selectBoost().executeAsList().forEach { println(it) }
     println("selectSnippet")
     sample.itemsQueries.selectSnippet().executeAsList().forEach { println(it) }
     println("selectSimpleTokenizer")
