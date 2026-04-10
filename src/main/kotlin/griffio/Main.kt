@@ -31,6 +31,8 @@ fun main() {
     sample.itemsQueries.selectPhrase().executeAsList().forEach { println(it) }
     println("selectTerm")
     sample.itemsQueries.selectTerm().executeAsList().forEach { println(it) }
+    println("selectScore")
+    sample.itemsQueries.selectScore().executeAsList().forEach { println(it) }
     println("selectSnippet")
     sample.itemsQueries.selectSnippet().executeAsList().forEach { println(it) }
     println("selectSimpleTokenizer")
@@ -51,5 +53,4 @@ fun main() {
     sample.searchQueries.selectUnicodeWordsTokenizer().executeAsOne().also { println(it.joinToString()) }
     println("selectChineseCompatibleTokenizer")
     sample.searchQueries.selectChineseCompatibleTokenizer().executeAsOne().also { println(it.joinToString()) }
-
-}
+  }

@@ -27,3 +27,10 @@ selectSnippet:
 SELECT id, snippet(description)
 FROM items
 WHERE description ||| 'shoes';
+
+selectScore:
+SELECT id, score(id)
+FROM items
+WHERE description ||| 'keyboard' OR rating < 2
+ORDER BY score(id) DESC
+LIMIT 5;
