@@ -8,3 +8,24 @@ SELECT 'Tokenize me!'::SIMPLE('stemmer=english')::TEXT[];
 
 selectNgramTokenizer:
 SELECT 'Tokenize me!'::NGRAM(3,3,'prefix_only=true')::TEXT[];
+
+selectSourceCodeTokenizer:
+SELECT 'let my_variable = 2'::SOURCE_CODE::TEXT[];
+
+selectIcuTokenizer:
+SELECT 'Hello world! 你好!'::ICU::TEXT[];
+
+selectChineseCompatibleTokenizer:
+SELECT 'Hello world! 你好!'::CHINESE_COMPATIBLE::TEXT[];
+
+selectRegexPatternTokenizer:
+SELECT 'Hello world!'::REGEX_PATTERN('(?i)\bh\w*')::TEXT[];
+
+selectWhitespaceTokenizer:
+SELECT 'Tokenize me!'::WHITESPACE::TEXT[];
+
+selectLiteralTokenizer:
+SELECT 'Tokenize me!'::LITERAL::TEXT[];
+
+selectUnicodeWordsTokenizer:
+SELECT 'Tokenize me! 😊'::UNICODE_WORDS('remove_emojis=true')::TEXT[];

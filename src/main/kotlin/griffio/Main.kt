@@ -37,5 +37,19 @@ fun main() {
     sample.searchQueries.selectSimpleTokenizer().executeAsOne().also { println(it.joinToString()) }
     println("selectNgramTokenizer")
     sample.searchQueries.selectNgramTokenizer().executeAsOne().also { println(it.joinToString()) }
+    println("selectSourceCodeTokenizer")
+    sample.searchQueries.selectSourceCodeTokenizer().executeAsOne().also { println(it.joinToString()) }
+    println("selectIcuTokenizer")
+    sample.searchQueries.selectIcuTokenizer().executeAsOne().also { println(it.joinToString()) }
+    println("selectRegexPatternTokenizer")
+    sample.searchQueries.selectRegexPatternTokenizer().executeAsOne().also { println(it.joinToString()) }
+    println("selectWhitespaceTokenizer")
+    sample.searchQueries.selectWhitespaceTokenizer().executeAsOne().also { println(it.joinToString()) }
+    println("selectLiteralTokenizer")
+    sample.searchQueries.selectLiteralTokenizer().executeAsOne().also { println(it.joinToString()) }
+    println("selectUnicodeWordsTokenizer")
+    sample.searchQueries.selectUnicodeWordsTokenizer().executeAsOne().also { println(it.joinToString()) }
+    println("selectChineseCompatibleTokenizer")
+    sample.searchQueries.selectChineseCompatibleTokenizer().executeAsOne().also { println(it.joinToString()) }
 
 }
