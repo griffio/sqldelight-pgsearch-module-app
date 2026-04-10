@@ -79,10 +79,6 @@ selectTokenizer:
 SELECT 'Tokenize me!'::SIMPLE('stemmer=english')::TEXT[];
 ```
 
-TODO
-* Add more operator functions
-* Add more token filters
-
 ---
 
 ```shell
