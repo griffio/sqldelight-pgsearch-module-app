@@ -78,6 +78,7 @@ private class PgSearchTypeResolver(private val parentResolver: TypeResolver) : P
 
     override fun functionType(functionExpr: SqlFunctionExpr): IntermediateType? =
         when (functionExpr.functionName.text.lowercase()) {
+            "score" -> IntermediateType(PrimitiveType.REAL)
             "snippet" -> IntermediateType(PrimitiveType.TEXT)
             "snippet_positions" -> IntermediateType(PrimitiveType.TEXT)
             else -> super.functionType(functionExpr) // postgresql.PostgreSqlTypeResolver.functionType calls parentResolver
