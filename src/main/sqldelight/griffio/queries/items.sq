@@ -24,26 +24,26 @@ FROM items
 WHERE description === 'running';
 
 selectSnippet:
-SELECT id, snippet(description)
+SELECT id, pdb.snippet(description) AS snippet
 FROM items
 WHERE description ||| 'shoes';
 
 selectScore:
-SELECT id, score(id)
+SELECT id, pdb.score(id) AS score
 FROM items
 WHERE description ||| 'keyboard' OR rating < 2
-ORDER BY score(id) DESC
+ORDER BY pdb.score(id) DESC
 LIMIT 5;
 
 selectBoost:
-SELECT id, score(id) AS bm25_score, description, category
+SELECT id, pdb.score(id) AS score, upper(description) AS upperDesc, category
 FROM items
-WHERE description ||| 'shoes'::BOOST(2) OR category ||| 'footwear'
-ORDER BY bm25_score DESC
+WHERE description ||| 'shoes'::pdb.BOOST(2) OR category ||| 'footwear'
+ORDER BY pdb.score(id) DESC
 LIMIT 5;
 
 selectFuzzy:
 SELECT id, description
 FROM items
-WHERE description &&& 'slee rann'::FUZZY(1, 'true')
+WHERE description &&& 'slee rann'::pdb.FUZZY(1, 'true')
 LIMIT 5;

@@ -5,7 +5,7 @@ import griffio.queries.Sample
 import org.postgresql.ds.PGSimpleDataSource
 
 private fun getSqlDriver() = PGSimpleDataSource().apply {
-    setURL("jdbc:postgresql://localhost:5432/mydatabase?options=-c%20search_path=pdb,public")
+    setURL("jdbc:postgresql://localhost:5432/mydatabase")
     applicationName = "App Main"
     user = "myuser"
     password = "mypassword"
