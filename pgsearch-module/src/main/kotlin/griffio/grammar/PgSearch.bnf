@@ -9,6 +9,8 @@
 
   parserImports=[
     "static com.alecstrong.sql.psi.core.psi.SqlTypes.COMMA"
+    "static com.alecstrong.sql.psi.core.psi.SqlTypes.DOT"
+    "static com.alecstrong.sql.psi.core.psi.SqlTypes.ID"
     "static com.alecstrong.sql.psi.core.psi.SqlTypes.LP"
     "static com.alecstrong.sql.psi.core.psi.SqlTypes.RP"
 
@@ -29,31 +31,36 @@ type_name ::= simple_data_type | ngram_data_type | source_code_data_type | icu_d
   implements = "app.cash.sqldelight.dialects.postgresql.grammar.psi.PostgreSqlTypeName"
 }
 
-simple_data_type ::= 'SIMPLE' [ LP {string_literal} [ ( COMMA {string_literal} ) * ] RP ]
+simple_data_type ::= 'pdb.SIMPLE' [ LP {string_literal} [ ( COMMA {string_literal} ) * ] RP ]
 
-ngram_data_type ::= 'NGRAM' LP sql_signed_number COMMA sql_signed_number [ COMMA {string_literal} ] RP
+ngram_data_type ::= 'pdb.NGRAM' LP sql_signed_number COMMA sql_signed_number [ COMMA {string_literal} ] RP
 
-source_code_data_type ::= 'SOURCE_CODE'
+source_code_data_type ::= 'pdb.SOURCE_CODE'
 
-icu_data_type ::= 'ICU'
+icu_data_type ::= 'pdb.ICU'
 
-regex_pattern_data_type ::= 'REGEX_PATTERN' LP {string_literal} RP
+regex_pattern_data_type ::= 'pdb.REGEX_PATTERN' LP {string_literal} RP
 
-whitespace_data_type ::= 'WHITESPACE'
+whitespace_data_type ::= 'pdb.WHITESPACE'
 
-literal_normalized_data_type ::= 'LITERAL_NORMALIZED' [ LP {string_literal} [ ( COMMA {string_literal} ) * ] RP ]
+literal_normalized_data_type ::= 'pdb.LITERAL_NORMALIZED' [ LP {string_literal} [ ( COMMA {string_literal} ) * ] RP ]
 
-literal_data_type ::= 'LITERAL'
+literal_data_type ::= 'pdb.LITERAL'
 
-unicode_words_data_type ::= 'UNICODE_WORDS' [ LP {string_literal} RP ]
+unicode_words_data_type ::= 'pdb.UNICODE_WORDS' [ LP {string_literal} RP ]
 
-chinese_compatible_data_type ::= 'CHINESE_COMPATIBLE'
+chinese_compatible_data_type ::= 'pdb.CHINESE_COMPATIBLE'
 
-boost_data_type ::= 'BOOST' LP sql_signed_number RP
+boost_data_type ::= 'pdb.BOOST' LP sql_signed_number RP
 
-const_data_type ::= 'CONST' LP {string_literal} RP
+const_data_type ::= 'pdb.CONST' LP {string_literal} RP
 
-fuzzy_data_type ::= 'FUZZY' LP sql_signed_number [ ( COMMA {string_literal} ) * ] RP
+fuzzy_data_type ::= 'pdb.FUZZY' LP sql_signed_number [ ( COMMA {string_literal} ) * ] RP
+
+function_name ::= [ 'pdb' DOT ] ID {
+  extends = "com.alecstrong.sql.psi.core.psi.impl.SqlFunctionNameImpl"
+  implements = "com.alecstrong.sql.psi.core.psi.SqlFunctionName"
+}
 
 index_method ::= 'bm25' {
   extends = "app.cash.sqldelight.dialects.postgresql.grammar.psi.impl.PostgreSqlIndexMethodImpl"

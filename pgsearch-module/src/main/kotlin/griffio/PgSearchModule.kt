@@ -15,6 +15,7 @@ import com.intellij.lang.parser.GeneratedParserUtilBase.Parser
 import griffio.grammar.PgSearchParser
 import griffio.grammar.PgSearchParserUtil
 import griffio.grammar.PgSearchParserUtil.extension_expr
+import griffio.grammar.PgSearchParserUtil.function_name
 import griffio.grammar.PgSearchParserUtil.index_method
 import griffio.grammar.PgSearchParserUtil.storage_parameters
 import griffio.grammar.PgSearchParserUtil.type_name
@@ -28,11 +29,20 @@ class PgSearchModule : SqlDelightModule {
         PgSearchParserUtil.overridePostgreSqlParser()
         // As the grammar doesn't support inheritance - override type_name manually to try inherited type_name
         // Capture any existing overrides (e.g., from other PostgreSql Modules)
+        val previousFunctionName = SqlParserUtil.function_name
         val previousTypeName = PostgreSqlParserUtil.type_name
         val previousExtensionExpr = PostgreSqlParserUtil.extension_expr
         val previousIndexMethod = PostgreSqlParserUtil.index_method
         val previousStorageParameters = PostgreSqlParserUtil.storage_parameters
         // etc
+
+        SqlParserUtil.function_name = Parser { psiBuilder, i ->
+            function_name?.parse(psiBuilder, i)
+                    ?: PgSearchParser.function_name_real(psiBuilder, i)
+                    || previousFunctionName?.parse(psiBuilder, i)
+                    ?: SqlParser.function_name_real(psiBuilder, i)
+        }
+
         PostgreSqlParserUtil.type_name = Parser { psiBuilder, i ->
             type_name?.parse(psiBuilder, i)
                     ?: PgSearchParser.type_name_real(psiBuilder, i)
@@ -78,9 +88,9 @@ private class PgSearchTypeResolver(private val parentResolver: TypeResolver) : P
 
     override fun functionType(functionExpr: SqlFunctionExpr): IntermediateType? =
         when (functionExpr.functionName.text.lowercase()) {
-            "score" -> IntermediateType(PrimitiveType.REAL)
-            "snippet" -> IntermediateType(PrimitiveType.TEXT)
-            "snippet_positions" -> IntermediateType(PrimitiveType.TEXT)
+            "pdb.score" -> IntermediateType(PrimitiveType.REAL)
+            "pdb.snippet" -> IntermediateType(PrimitiveType.TEXT)
+            "pdb.snippet_positions" -> IntermediateType(PrimitiveType.TEXT)
             else -> super.functionType(functionExpr) // postgresql.PostgreSqlTypeResolver.functionType calls parentResolver
         }
 }
