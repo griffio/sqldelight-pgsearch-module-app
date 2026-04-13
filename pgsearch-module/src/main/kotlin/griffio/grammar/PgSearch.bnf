@@ -67,7 +67,7 @@ index_method ::= 'bm25' {
   implements = "app.cash.sqldelight.dialects.postgresql.grammar.psi.PostgreSqlIndexMethod"
 }
 
-storage_parameters ::= 'key_field' | 'numeric_fields' | 'text_fields' | 'json_fields' {
+storage_parameters ::= 'key_field' | 'numeric_fields' | 'text_fields' | 'json_fields' | 'search_tokenizer' {
   extends = "app.cash.sqldelight.dialects.postgresql.grammar.psi.impl.PostgreSqlStorageParameterImpl"
   implements = "app.cash.sqldelight.dialects.postgresql.grammar.psi.PostgreSqlStorageParameter"
 }
