@@ -1,0 +1,2 @@
+selectTitle:
+SELECT id, title FROM products WHERE title ||| :query ORDER BY id;

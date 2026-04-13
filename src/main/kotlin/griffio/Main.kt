@@ -57,4 +57,6 @@ fun main() {
     sample.searchQueries.selectUnicodeWordsTokenizer().executeAsOne().also { println(it.joinToString()) }
     println("selectChineseCompatibleTokenizer")
     sample.searchQueries.selectChineseCompatibleTokenizer().executeAsOne().also { println(it.joinToString()) }
+    println("selectTitle")
+    sample.productQueries.selectTitle("sho").executeAsList().forEach { println(it) }
   }
